@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import java.lang.String;
 
 public class Cadena_caracteres {
-    public static void main(String[] args){
+public static void main(String[] args){
 /***********CONSULTANDO EL TAMAÑO DE LA CADENA****** */
         String cadena = "Hola Java";
         System.out.println("La cadena contiene "+ cadena.length() +" caracteres");
@@ -40,13 +40,13 @@ public class Cadena_caracteres {
         System.out.println(nomb4.compareTo(nomb5));
 
 /************BUSCANDO UN VALOR DENTRO DE UNA CADENA USANDO INDEXOF************* */
-    String last_nom = "paranricutirimicuaro";
-    Pattern pattern = Pattern.compile("[a]");
-    Matcher matcher = pattern.matcher(last_nom);
-    int count = 0;
-    while(matcher.find()){
-        count++;
-    }
+Pattern pattern = Pattern.compile("[a]");
+String last_nom = "paranricutirimicuaro";
+Matcher matcher = pattern.matcher(last_nom);
+int count = 0;
+while(matcher.find()){
+count++;
+}
         System.out.println(count);
         System.out.println(last_nom.indexOf("a"));
         System.out.println(nomb4.indexOf("e", 1));
@@ -79,22 +79,23 @@ public class Cadena_caracteres {
         String test = "is";
 
 	
-	    System.out.println("input.contains(test) = " + input.contains(test));
+	System.out.println("input.contains(test) = " + input.contains(test));
 
 /*******************EJERCICIO EXTRA PALABRAS POLIDROMOS************* */
-        String hola = "somos";
-        String quitar_espa = hola.replace(" ", "");
-        String acumulador = "";
-        for(int i = quitar_espa.length()-1; i >= 0; i--){
-            char d = quitar_espa.charAt(i);
-            acumulador= acumulador + d;
-            //System.out.println(d);
-        }
-        if (quitar_espa.equalsIgnoreCase(acumulador)) {
-            System.out.println("la palabra "+acumulador+" es igual a "+hola);
-        }else{
-            System.out.println("la palabra "+acumulador+" no es igual que "+hola);
-        }
+    String hola = "SoM os";
+    String quitar_espa = hola.replace(" ", "").toUpperCase();
+    String acumulador = "";
+    for(int i = quitar_espa.length()-1; i >= 0; i--){
+        char d = quitar_espa.charAt(i);
+        acumulador= acumulador + d;
+        //System.out.println(d);
+    }
+
+    if (quitar_espa.equalsIgnoreCase(acumulador)) {
+        System.out.println("la palabra: ("+quitar_espa+") es una palabra Polidromo");
+    }else{
+        System.out.println("la palabra "+acumulador+" no es igual que "+hola);
+    }
 
 /*******************EJERCICIO EXTRA PALABRAS ANAGRAMAS************* */
         String text1 = "ballena";
@@ -122,36 +123,31 @@ public class Cadena_caracteres {
         }else{
                 System.out.println("Las palabras no poseen la misma longitud");   
         }
-         
 
 /*******************EJERCICIO EXTRA PALABRAS ISOGRAMAS************* */
-         String palabra_isogra = "Dialogo";
-         HashMap<Character, Integer> mp_isogra = new HashMap<>();
-         for(int i = 0; i < palabra_isogra.length(); i++){
+        String palabra_isogra = "Dialogo";
+        HashMap<Character, Integer> mp_isogra = new HashMap<>();
+        for(int i = 0; i < palabra_isogra.length(); i++){
                 char letra_divi = palabra_isogra.charAt(i);
                 if (!mp_isogra.containsKey(letra_divi)){
                         mp_isogra.put(letra_divi, 1);
                 }else{
                         mp_isogra.put(letra_divi, mp_isogra.get(letra_divi)+1);
                 }
-         }
-         System.out.println(mp_isogra);
-         int count1 = 0;
-         int count2 = 0;
-         for(Map.Entry entrada : mp_isogra.entrySet()){
-                if(entrada.getValue().equals(1)){
-                        count1++;
-                          
-                }else{
-                        count2++;
-                          
+        }
+        //System.out.println(mp_isogra);
+        int count1 = 0;
+        for(Map.Entry<Character, Integer> entrada : mp_isogra.entrySet()){
+                if(entrada.getValue().equals(2) == true){
+                        count1++;       
                 }
-         }
-         if (count2 > 0){
-                System.out.println("LA PALABRA "+palabra_isogra+" ES ISOGRAMA");
-         }else{
-                System.out.println("LA PALABRA "+palabra_isogra+" ES HETEROGRAMA");
-         }
+        }
+
+        if (count1 > 0){
+            System.out.println("LA PALABRA "+palabra_isogra+" ES ISOGRAMA");
+        }else{
+            System.out.println("LA PALABRA "+palabra_isogra+" ES HETEROGRAMA");
+        }
     }
     
 }
