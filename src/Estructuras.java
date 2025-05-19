@@ -174,35 +174,45 @@ public static Scanner scanner = new Scanner(System.in);
                 default:
                     break;
             }
-           
-            
         }
     }
 //INSERTAR USUARIO
-    public static void inserta_contacto (){
+public static void inserta_contacto (){
     System.out.println("Ingresar Nombre: ");
-    String nombre = scanner.nextLine();
-        if (Agenda_Contactos.containsKey(nombre)){
-            System.out.println("El contacto ya se encuentra registrado");
-            return;
-        }
-        System.out.println("Ingrese numero de telefono: ");
-        String telf_num = scanner.nextLine();
-        if (Telefono_isNumeric(telf_num) == false) {
-            System.out.println("ERROR: EL numero de telefono supera en maximo aceptado o a Ingresado un Caracter!");
-            System.out.println(telf_num.length());
-        }else{
-            Agenda_Contactos.put(nombre, telf_num);
-            System.out.println("EL usuario fue creado correctatmente!");
-              
-  
-        }  
+    String nombre = scanner.nextLine().toLowerCase();
+    if (Agenda_Contactos.containsKey(nombre)){
+        System.out.println("El contacto ya se encuentra registrado");
+        return;
     }
+    System.out.println("Ingrese numero de telefono: ");
+    String telf_num = scanner.nextLine();
+    /*if (Telefono_isNumeric(telf_num) == false) {
+        System.out.println("ERROR: EL numero de telefono supera en maximo aceptado o a Ingresado un Caracter!");
+        System.out.println(telf_num.length());
+    }else{
+        Agenda_Contactos.put(nombre, telf_num);
+        System.out.println("EL usuario fue creado correctatmente!");
+    } */
+int count_digi = 0;
+for(int i = 0; i < telf_num.length(); i++){
+    if(!Character.isDigit(telf_num.charAt(i))){
+        count_digi++;
+    }
+} 
+if(count_digi > 0){
+    System.out.println("ERROR: EL numero de telefono contiene uno o mas Caracteres!");
+}else if(telf_num.length() > 11){
+    System.out.println("ERROR: EL numero de telefono supera el maximo de numeros aceptados!");
+}else{
+    Agenda_Contactos.put(nombre.toLowerCase(), telf_num);
+    System.out.println("EL usuario fue creado correctatmente!");
+    }
+}
 
 //FUNCION PARA BUSCAR EL NUMERO DE UNA PERSONA
     public static void Buscar(){
         System.out.println("Ingrese el Nombre a Buscar: ");
-        String nombre_buscar = scanner.nextLine();
+        String nombre_buscar = scanner.nextLine().toLowerCase();
         if (Agenda_Contactos.containsKey(nombre_buscar) == true) {
             System.out.println(Agenda_Contactos.get(nombre_buscar));
         }else{
@@ -214,7 +224,7 @@ public static Scanner scanner = new Scanner(System.in);
 //FUNCION ACTUALIZAR DATO
 public static void Actualizar(){
     System.out.println("Ingrese el Nombre que desea Actualizar: ");
-    String dato_actualizar = scanner.nextLine();
+    String dato_actualizar = scanner.nextLine().toLowerCase();
     if (Agenda_Contactos.containsKey(dato_actualizar) == true) {
         System.out.println("Ingrese numero de telefono: ");
         String telf_num = scanner.nextLine();
